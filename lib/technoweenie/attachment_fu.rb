@@ -140,6 +140,9 @@ module Technoweenie # :nodoc:
             puts "Problems loading #{options[:processor]}Processor: #{$!}"
           end
         end unless parent_options[:processor] # Don't let child override processor
+        
+        # propagate parent :processor option downwards, so that it ends up in child's parent_options
+        attachment_options[:processor] = parent_options[:processor] if parent_options[:processor]
       end
 
       def load_related_exception?(e) #:nodoc: implementation specific
